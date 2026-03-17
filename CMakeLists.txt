@@ -14,4 +14,7 @@ add_executable(untitled1 main.cpp
         src/Estructuras/LIstaProductosOrdenada.cpp
         src/Arboles/AVLNodo.cpp
         src/Arboles/AVLNodo.h
-        src/Arboles/ArbolAVL.h)
+        src/Arboles/ArbolAVL.h
+        src/Arboles/ArbolAVL.cpp
+        src/TablaHash/NodoHash.h
+        src/TablaHash/NodoHash.cpp)
