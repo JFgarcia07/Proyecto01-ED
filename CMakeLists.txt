@@ -17,4 +17,6 @@ add_executable(untitled1 main.cpp
         src/Arboles/ArbolAVL.h
         src/Arboles/ArbolAVL.cpp
         src/TablaHash/NodoHash.h
-        src/TablaHash/NodoHash.cpp)
+        src/TablaHash/NodoHash.cpp
+        src/TablaHash/TablaHash.h
+        src/TablaHash/TablaHash.cpp)

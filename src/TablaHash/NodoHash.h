@@ -12,7 +12,7 @@ class NodoHash
     Producto producto;
     NodoHash* siguiente;
 
-    NodoHash(const Producto& produto);
+    NodoHash(const Producto& producto);
     ~NodoHash();
 };
 
