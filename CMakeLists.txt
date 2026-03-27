@@ -19,4 +19,8 @@ add_executable(untitled1 main.cpp
         src/TablaHash/NodoHash.h
         src/TablaHash/NodoHash.cpp
         src/TablaHash/TablaHash.h
-        src/TablaHash/TablaHash.cpp)
+        src/TablaHash/TablaHash.cpp
+        src/Arboles/BNodo.h
+        src/Arboles/BNodo.cpp
+        src/Arboles/ArbolB.h
+        src/Arboles/ArbolB.cpp)
