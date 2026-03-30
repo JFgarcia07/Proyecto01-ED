@@ -23,4 +23,14 @@ add_executable(untitled1 main.cpp
         src/Arboles/BNodo.h
         src/Arboles/BNodo.cpp
         src/Arboles/ArbolB.h
-        src/Arboles/ArbolB.cpp)
+        src/Arboles/ArbolB.cpp
+        src/Arboles/BMasNodo.h
+        src/Arboles/BMasNodo.cpp
+        src/Arboles/ArbolBMas.h
+        src/Arboles/ArbolBMas.cpp
+        src/Logica/Catologo.h
+        src/Logica/Catologo.cpp
+        src/Logica/LectorCSV.h
+        src/Logica/LectorCSV.cpp
+        src/Logica/MotorDelSistema.cpp
+)

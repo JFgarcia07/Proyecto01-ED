@@ -20,7 +20,7 @@ private:
 
     Producto* buscarPriv(BNodo* nodo, const string& fecha) const;
 
-    void rangoBusquedaPriv(BNodo* nodo, const string& fechaInicio, const string& fechaFinal, int& contador);
+    void rangoBusquedaPriv(BNodo* nodo, const string& fechaInicio, const string& fechaFinal, int& contador) const;
 
     void removerDelNodo(BNodo* nodo, const string& fecha);
     void removerDeHoja(BNodo* nodo, int indice);
@@ -46,7 +46,7 @@ private:
 
     Producto* buscar(const string& fecha) const;
 
-    void rangoBusqueda(const string& fechaInicio, const string& fechaFinal);
+    void rangoBusqueda(const string& fechaInicio, const string& fechaFinal) const;
 
     bool remover(const string& fecha);
 

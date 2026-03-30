@@ -61,7 +61,7 @@ Producto* ArbolB::buscarPriv(BNodo* nodo, const string& fecha) const
     return buscarPriv(nodo->hijos[i], fecha);
 }
 
-void ArbolB::rangoBusqueda(const string& fechaInicio, const string& fechaFinal)
+void ArbolB::rangoBusqueda(const string& fechaInicio, const string& fechaFinal) const
 {
     if (raiz == nullptr)
     {
@@ -76,7 +76,7 @@ void ArbolB::rangoBusqueda(const string& fechaInicio, const string& fechaFinal)
 }
 
 
-void ArbolB::rangoBusquedaPriv(BNodo* nodo, const string& fechaInicio, const string& fechaFinal, int& contador)
+void ArbolB::rangoBusquedaPriv(BNodo* nodo, const string& fechaInicio, const string& fechaFinal, int& contador) const
 {
     int i = 0;
 
