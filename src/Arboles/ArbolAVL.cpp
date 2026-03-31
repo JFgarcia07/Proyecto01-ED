@@ -4,7 +4,7 @@
 
 #include "ArbolAVL.h"
 #include <iostream>
-#include <bits/fs_path.h>
+#include <filesystem>
 
 #include "../Estructuras/Nodo.h"
 
@@ -66,6 +66,22 @@ AVLNodo* ArbolAVL::rotacionIzquierda(AVLNodo* x)
     return y;
 }
 
+AVLNodo* ArbolAVL::rotacionDerecha(AVLNodo* y)
+{
+    AVLNodo* x = y->izquierda;
+    AVLNodo* T2 = x->derecha;
+
+    // Rotación
+    x->derecha = y;
+    y->izquierda = T2;
+
+    // Actualizar alturas
+    y->altura = max(getAltura(y->izquierda), getAltura(y->derecha)) + 1;
+    x->altura = max(getAltura(x->izquierda), getAltura(x->derecha)) + 1;
+
+    return x;
+}
+
 AVLNodo* ArbolAVL::insertarPriv(AVLNodo* nodo, const Producto& producto, bool& aprovado)
 {
     //HACER INSERCION
@@ -120,6 +136,14 @@ AVLNodo* ArbolAVL::insertarPriv(AVLNodo* nodo, const Producto& producto, bool& a
     }
 
     return nodo;
+}
+
+bool ArbolAVL::insertar(const Producto& producto)
+{
+    bool aprovado = false;
+    raiz = insertarPriv(raiz, producto, aprovado);
+    if (aprovado) size++;
+    return aprovado;
 }
 
 Producto* ArbolAVL::buscar(const string& nombre) const

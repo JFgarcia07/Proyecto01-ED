@@ -43,7 +43,7 @@ class Catalogo
     void generarArchivosDot() const;
 
     int getTotal() const;
-    boos estaVacio() const;
+    bool estaVacio() const;
 };
 
 #endif //UNTITLED1_CATOLOGO_H

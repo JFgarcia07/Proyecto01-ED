@@ -1,0 +1,3 @@
+/home/jfgarcianata/CLionProjects/Proyecto01_EDD/build/CMakeFiles/Proy1EDD.dir
+/home/jfgarcianata/CLionProjects/Proyecto01_EDD/build/CMakeFiles/edit_cache.dir
+/home/jfgarcianata/CLionProjects/Proyecto01_EDD/build/CMakeFiles/rebuild_cache.dir

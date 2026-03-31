@@ -4,12 +4,13 @@
 
 #include <iostream>
 #include <string>
+#include "MotorDelSistema.h"
 #include "Catologo.h"
 #include "LectorCSV.h"
 
 using namespace std;
 
-void header()
+void MotorDelSistema::header()
 {
     cout << "+=============================================+" << endl;
     cout << "|   CATALOGO DE PRODUCTOS - SUPERMERCADO      |" << endl;
@@ -17,7 +18,7 @@ void header()
     cout << "+=============================================+" << endl;
 }
 
-void menu()
+void MotorDelSistema::menu()
 {
     cout << "\n+---------------------------------------------+" << endl;
     cout << "| MENU PRINCIPAL                               |" << endl;
@@ -37,7 +38,7 @@ void menu()
     cout << "Opcion: ";
 }
 
-void cargarCSV(Catalogo& catalogo)
+void MotorDelSistema::cargarCSV(Catalogo& catalogo)
 {
     string nombreArchivo;
     cout << "\nRuta del archivo CSV (ej: data/productos.csv): ";
@@ -51,7 +52,7 @@ void cargarCSV(Catalogo& catalogo)
     }
 }
 
-void agregarProducto(Catalogo& catalogo)
+void MotorDelSistema::agregarProducto(Catalogo& catalogo)
 {
     Producto producto;
 
@@ -87,7 +88,7 @@ void agregarProducto(Catalogo& catalogo)
     }
 }
 
-void removerProducto(Catalogo& catalogo)
+void MotorDelSistema::removerProducto(Catalogo& catalogo)
 {
     string codigoBarras;
     cout << "\nCodigo de barras del producto a eliminar" << endl;
@@ -100,9 +101,140 @@ void removerProducto(Catalogo& catalogo)
     }
 }
 
-void buscarPorNombre()
+void MotorDelSistema::buscarPorNombre(Catalogo& catalogo)
 {
     string nombre;
     cout << "\nNombre del producto";
     getline(cin, nombre);
+
+    Producto* producto = catalogo.buscarPorNombre(nombre);
+    if (producto)
+    {
+        cout << "\nProducto encontrado " << endl;
+        producto->mostrarProducto();
+    } else
+    {
+        cout << "\nProducto '" << nombre << "' no encontrado." << std::endl;
+    }
+}
+
+void MotorDelSistema::buscarPorCodigoBarras(Catalogo& catalogo)
+{
+    string codigoBarras;
+    cout << "\nCodigo de barras del producto";
+    cin >> codigoBarras;
+
+    Producto* producto = catalogo.buscarPorCodigoBarras(codigoBarras);
+    if (producto)
+    {
+        cout << "\nProducto encontrado " << endl;
+        producto->mostrarProducto();
+    } else
+    {
+        cout << "\nProducto con codigo'" << codigoBarras << "' no encontrado." << std::endl;
+    }
+}
+
+void MotorDelSistema::buscarPorCategoria(Catalogo& catalogo)
+{
+    string categoria;
+    cout << "\nCodigo de categoria";
+    cin >> categoria;
+
+    cout << endl;
+    catalogo.buscarPorCategoria(categoria);
+}
+
+void MotorDelSistema::buscarPorRangoFecha(Catalogo& catalogo)
+{
+    string fechaInicio, fechaFin;
+    cout << "\nFecha de inicio (YYYY - MM - DD)";
+    cin >> fechaInicio;
+    cout << "\nFecha final (YYYY - MM - DD)";
+    cin >> fechaFin;
+
+    cout << endl;
+    catalogo.buscarPorFechas(fechaInicio, fechaFin);
+}
+
+void MotorDelSistema::generarDot(Catalogo& catalogo)
+{
+    if (catalogo.estaVacio())
+    {
+        cout << "\nEl catalogo esta vacio. Cargue datos primero." << endl;
+        return;
+    }
+
+    system("mkdir -p output");
+
+    catalogo.generarArchivosDot();
+
+    cout << "\nArchivos generados en output/:" << endl;
+    cout << "  - avl_tree.dot" << endl;
+    cout << "  - b_tree.dot" << endl;
+    cout << "  - bplus_tree.dot" << endl;
+}
+
+void MotorDelSistema::mostrarDatosHash(Catalogo& catalogo)
+{
+    if (catalogo.estaVacio()) {
+        cout << "\nEl catalogo esta vacio." << endl;
+        return;
+    }
+    cout << std::endl;
+    catalogo.getTablaHash().mostrarEstadisticas();
+}
+
+void MotorDelSistema::motorDelSistema()
+{
+    Catalogo catalogo;
+    int opcion = -1;
+
+    header();
+
+    while (opcion != 0)
+    {
+        menu();
+        cin >> opcion;
+
+        switch (opcion)
+        {
+            case 1:
+                cargarCSV(catalogo);
+                break;
+            case 2:
+                agregarProducto(catalogo);
+                break;
+            case 3:
+                removerProducto(catalogo);
+                break;
+            case 4:
+                buscarPorNombre(catalogo);
+                break;
+            case 5:
+                buscarPorCodigoBarras(catalogo);
+                break;
+            case 6:
+                buscarPorCategoria(catalogo);
+                break;
+            case 7:
+                buscarPorRangoFecha(catalogo);
+                break;
+            case 8:
+                catalogo.listaPorNombres();
+                break;
+            case 9:
+                generarDot(catalogo);
+                break;
+            case 10:
+                mostrarDatosHash(catalogo);
+                break;
+            case 0:
+                cout << "\nSaliendo del programa..." << endl;
+                break;
+            default:
+                cout << "\nOpcion no valida." << endl;
+                break;
+        }
+    }
 }

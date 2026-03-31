@@ -24,7 +24,7 @@ TablaHash::~TablaHash() {
     size = 0;
 }
 
-void destruirCadena(NodoHash* nodo)
+void TablaHash::destruirCadena(NodoHash* nodo)
 {
     while (nodo != nullptr)
     {

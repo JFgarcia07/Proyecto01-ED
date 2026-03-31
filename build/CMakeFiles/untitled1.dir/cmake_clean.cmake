@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/untitled1.dir/main.cpp.o"
+  "CMakeFiles/untitled1.dir/main.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Arboles/AVLNodo.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Arboles/AVLNodo.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Arboles/ArbolAVL.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Arboles/ArbolAVL.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Arboles/ArbolB.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Arboles/ArbolB.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Arboles/ArbolBMas.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Arboles/ArbolBMas.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Arboles/BMasNodo.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Arboles/BMasNodo.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Arboles/BNodo.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Arboles/BNodo.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Estructuras/LIstaProductosOrdenada.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Estructuras/LIstaProductosOrdenada.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Estructuras/ListaProductos.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Estructuras/ListaProductos.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Estructuras/Nodo.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Estructuras/Nodo.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Estructuras/Producto.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Estructuras/Producto.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Logica/Catologo.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Logica/Catologo.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Logica/LectorCSV.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Logica/LectorCSV.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/Logica/MotorDelSistema.cpp.o"
+  "CMakeFiles/untitled1.dir/src/Logica/MotorDelSistema.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/TablaHash/NodoHash.cpp.o"
+  "CMakeFiles/untitled1.dir/src/TablaHash/NodoHash.cpp.o.d"
+  "CMakeFiles/untitled1.dir/src/TablaHash/TablaHash.cpp.o"
+  "CMakeFiles/untitled1.dir/src/TablaHash/TablaHash.cpp.o.d"
+  "untitled1"
+  "untitled1.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/untitled1.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

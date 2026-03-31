@@ -92,6 +92,41 @@ bool LectorCSV::parsearLinea(const string& linea, Producto& producto)
     return true;
 }
 
+bool LectorCSV::validar(const Producto& producto, int numLinea, string& error)
+{
+    if (producto.nombre.empty())
+    {
+        error = "Linea " + to_string(numLinea) + " : nombre vacio";
+        return false;
+    }
+    if (producto.codigoBarras.empty())
+    {
+        error = "Linea " + to_string(numLinea) + ": codigo de barras vacio";
+        return false;
+    }
+    if (producto.categoria.empty())
+    {
+        error = "Linea " + to_string(numLinea) + ": categoria vacia";
+        return false;
+    }
+    if (producto.fechaExpiracion.empty() || producto.fechaExpiracion.size() != 10)
+    {
+        error = "Linea " + to_string(numLinea) + " fecha invalida " + producto.fechaExpiracion;
+        return false;
+    }
+    if (producto.precio < 0)
+    {
+        error = "Linea " + to_string(numLinea) + " : precio negativo";
+        return false;
+    }
+    if (producto.stock < 0)
+    {
+        error = "Linea " + to_string(numLinea) + " : stock negativo";
+        return false;
+    }
+    return true;
+}
+
 int LectorCSV::cargar(const string& nombreArchivo, Catalogo& catalogo)
 {
     ifstream archivo(nombreArchivo);

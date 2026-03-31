@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 4.1)
-project(untitled1)
+cmake_minimum_required(VERSION 3.28)
+project(Proy1EDD)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(untitled1 main.cpp
+add_executable(Proy1EDD main.cpp
         src/Estructuras/Producto.h
         src/Estructuras/Producto.cpp
         src/Estructuras/ListaProductos.h
@@ -33,4 +33,5 @@ add_executable(untitled1 main.cpp
         src/Logica/LectorCSV.h
         src/Logica/LectorCSV.cpp
         src/Logica/MotorDelSistema.cpp
+        src/Logica/MotorDelSistema.h
 )

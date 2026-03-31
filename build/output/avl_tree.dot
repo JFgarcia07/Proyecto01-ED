@@ -1,0 +1,9 @@
+digraph BPlusTree {
+    node [shape=record, style=filled, fillcolor="#EEEDFE"];
+    rankdir=TB;
+
+    node0 [label="Lacteos: ", fillcolor="#E1F5EE"];
+
+    // Enlaces entre hojas
+    { rank=same; }
+}

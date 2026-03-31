@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Proy1EDD.dir/main.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/main.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/AVLNodo.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/AVLNodo.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/ArbolAVL.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/ArbolAVL.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/ArbolB.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/ArbolB.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/ArbolBMas.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/ArbolBMas.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/BMasNodo.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/BMasNodo.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/BNodo.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Arboles/BNodo.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/LIstaProductosOrdenada.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/LIstaProductosOrdenada.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/ListaProductos.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/ListaProductos.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/Nodo.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/Nodo.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/Producto.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Estructuras/Producto.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Logica/Catologo.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Logica/Catologo.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Logica/LectorCSV.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Logica/LectorCSV.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/Logica/MotorDelSistema.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/Logica/MotorDelSistema.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/TablaHash/NodoHash.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/TablaHash/NodoHash.cpp.o.d"
+  "CMakeFiles/Proy1EDD.dir/src/TablaHash/TablaHash.cpp.o"
+  "CMakeFiles/Proy1EDD.dir/src/TablaHash/TablaHash.cpp.o.d"
+  "Proy1EDD"
+  "Proy1EDD.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Proy1EDD.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
