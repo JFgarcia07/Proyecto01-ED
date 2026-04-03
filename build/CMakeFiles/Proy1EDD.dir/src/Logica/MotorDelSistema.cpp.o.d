@@ -171,4 +171,5 @@ CMakeFiles/Proy1EDD.dir/src/Logica/MotorDelSistema.cpp.o: \
  /home/jfgarcianata/CLionProjects/Proyecto01_EDD/src/Logica/../TablaHash/TablaHash.h \
  /home/jfgarcianata/CLionProjects/Proyecto01_EDD/src/Logica/../TablaHash/NodoHash.h \
  /home/jfgarcianata/CLionProjects/Proyecto01_EDD/src/Logica/../TablaHash/../Estructuras/Producto.h \
+ /usr/include/c++/13/limits \
  /home/jfgarcianata/CLionProjects/Proyecto01_EDD/src/Logica/LectorCSV.h

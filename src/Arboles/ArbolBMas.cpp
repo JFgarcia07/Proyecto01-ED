@@ -92,8 +92,8 @@ void ArbolBMas::separarHijoPriv(BMasNodo* padre, int i, BMasNodo* hijo)
         nuevoNodo->numClaves = hijo->numClaves - (grado - 1);
         for (int j = 0; j < nuevoNodo->numClaves; j++)
         {
-            nuevoNodo->claves[j] = padre->claves[j + grado - 1];
-            nuevoNodo->data[j] = padre->data[j + grado - 1];
+            nuevoNodo->claves[j] = hijo->claves[j + grado - 1];
+            nuevoNodo->data[j] = hijo->data[j + grado - 1];
         }
         hijo->numClaves = grado - 1;
 
@@ -172,7 +172,7 @@ void ArbolBMas::insertarNoLlenoPriv(BMasNodo* nodo, const Producto& producto)
                 i++;
             }
         }
-        insertarNoLlenoPriv(nodo, producto);
+        insertarNoLlenoPriv(nodo->hijo[i], producto);
     }
 }
 
@@ -239,7 +239,7 @@ bool ArbolBMas::remover(const string& categoria, const string& codigoBarras)
             raiz = raiz->hijo[0];
             raizVieja->hijo[0] = nullptr;
         }
-        delete raiz;
+        delete raizVieja;
     }
 
     size--;
@@ -444,7 +444,7 @@ void ArbolBMas::merge(BMasNodo* nodo, int indice)
     {
         nodo->hijo[i - 1] = nodo->hijo[i];
     }
-    nodo->numClaves++;
+    nodo->numClaves--;
 
     delete hermano;
 }
@@ -486,40 +486,23 @@ void ArbolBMas::generarDot(const string& nombreDeArchivo) const
     if (raiz == nullptr)
     {
         dot += "    empty [label=\"Arbol vacio\"];\n";
-    }  else
+    } else
     {
         int nodoId = 0;
         generarDotHelper(raiz, dot, nodoId);
+    }
 
-        dot += "\n    // Enlaces entre hojas\n";
-        dot += "    { rank=same; ";
+    dot += "}\n";
 
-        BMasNodo* hoja = raiz;
-        while (!hoja->esHoja)
-        {
-            hoja = hoja->hijo[0];
-        }
-
-        dot += "}\n";
-
-        hoja = raiz;
-        while (!hoja->esHoja)
-        {
-            hoja = hoja->hijo[0];
-        }
-
-        dot += "}\n";
-
-        ofstream file(nombreDeArchivo);
-
-        if (file.is_open())
-        {
-            file << dot;
-            file.close();
-            cout << "Archivo DOT generado: " << nombreDeArchivo << std::endl;
-        } else {
-            std::cout << "Error al crear archivo: " << nombreDeArchivo << std::endl;
-        }
+    ofstream file(nombreDeArchivo);
+    if (file.is_open())
+    {
+        file << dot;
+        file.close();
+        cout << "Archivo DOT generado: " << nombreDeArchivo << endl;
+    } else
+    {
+        cout << "Error al crear archivo: " << nombreDeArchivo << endl;
     }
 }
 

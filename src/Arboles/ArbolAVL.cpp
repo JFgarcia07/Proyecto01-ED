@@ -4,6 +4,8 @@
 
 #include "ArbolAVL.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <filesystem>
 
 #include "../Estructuras/Nodo.h"
@@ -52,8 +54,8 @@ int ArbolAVL::max(int a, int b) const
  */
 AVLNodo* ArbolAVL::rotacionIzquierda(AVLNodo* x)
 {
-    AVLNodo* y = x->izquierda;
-    AVLNodo* T2 = y->derecha;
+    AVLNodo* y = x->derecha;
+    AVLNodo* T2 = y->izquierda;
 
     //ROTAMOS
     y->izquierda = x;
@@ -93,7 +95,7 @@ AVLNodo* ArbolAVL::insertarPriv(AVLNodo* nodo, const Producto& producto, bool& a
 
     if (producto.nombre < nodo->data.nombre)
     {
-        nodo->izquierda = insertarPriv(nodo->derecha, producto, aprovado);
+        nodo->izquierda = insertarPriv(nodo->izquierda, producto, aprovado);
     } else if (producto.nombre > nodo->data.nombre)
     {
         nodo->derecha = insertarPriv(nodo->derecha, producto, aprovado);
@@ -118,7 +120,7 @@ AVLNodo* ArbolAVL::insertarPriv(AVLNodo* nodo, const Producto& producto, bool& a
     }
 
     //CASO RR
-    if (balance > 1 && producto.nombre > nodo->derecha->data.nombre)
+    if (balance < -1 && producto.nombre > nodo->derecha->data.nombre)
     {
         return rotacionIzquierda(nodo);
     }
@@ -178,7 +180,7 @@ bool ArbolAVL::remover(const string& nombre)
 AVLNodo* ArbolAVL::getNodoMinimoPriv(AVLNodo* nodo) const
 {
     AVLNodo* actual = nodo;
-    while (actual != nullptr)
+    while (actual->izquierda != nullptr)
     {
         actual = actual->izquierda;
     }
@@ -195,10 +197,10 @@ AVLNodo* ArbolAVL::removerPriv(AVLNodo* nodo, const string& nombre, bool& aprova
 
     if (nombre < nodo->data.nombre)
     {
-        nodo->izquierda =  removerPriv(raiz, nombre, aprovado);
+        nodo->izquierda = removerPriv(nodo->izquierda, nombre, aprovado);
     } else if (nombre > nodo->data.nombre)
     {
-        nodo->derecha =  removerPriv(raiz, nombre, aprovado);
+        nodo->derecha = removerPriv(nodo->derecha, nombre, aprovado);
     } else
     {
         aprovado = true;
@@ -208,7 +210,7 @@ AVLNodo* ArbolAVL::removerPriv(AVLNodo* nodo, const string& nombre, bool& aprova
         {
             AVLNodo* temporal = nodo->izquierda ? nodo->izquierda : nodo->derecha;
 
-            if (temporal == nodo->derecha)
+            if (temporal == nullptr)
             {
                 //SIGNIFICA QUE NO TIENE HIJOS
                 temporal = nodo;
@@ -226,8 +228,9 @@ AVLNodo* ArbolAVL::removerPriv(AVLNodo* nodo, const string& nombre, bool& aprova
 
             //COPIAMOS LOS DATOA DEL SUCESOR
             nodo->data = sucesor->data;
+            string nombreSucesor = sucesor->data.nombre;
 
-            nodo->derecha = removerPriv(nodo->derecha, sucesor->data.nombre, aprovado);
+            nodo->derecha = removerPriv(nodo->derecha, nombreSucesor, aprovado);
             aprovado = true;
         }
     }
@@ -282,10 +285,49 @@ void ArbolAVL::inOrdenPriv(AVLNodo* nodo) const
     inOrdenPriv(nodo->derecha);
 }
 
+void ArbolAVL::generarDotPriv(AVLNodo* nodo, string& dot) const
+{
+    if (nodo == nullptr) return;
+
+    dot += "    \"" + nodo->data.nombre + "\" [label=\"" + nodo->data.nombre + "\\n(" + to_string(nodo->altura) + ")\"];\n";
+
+    if (nodo->izquierda)
+    {
+        dot += "    \"" + nodo->data.nombre + "\" -> \"" + nodo->izquierda->data.nombre + "\";\n";
+        generarDotPriv(nodo->izquierda, dot);
+    }
+    if (nodo->derecha)
+    {
+        dot += "    \"" + nodo->data.nombre + "\" -> \"" + nodo->derecha->data.nombre + "\";\n";
+        generarDotPriv(nodo->derecha, dot);
+    }
+}
+
 void ArbolAVL::generarDot(const string& nombre) const
 {
     string dot = "digraph ArbolAVL {\n";
+    dot += "    node [shape=ellipse, style=filled, fillcolor=\"#D6EAF8\"];\n\n";
 
+    if (raiz == nullptr)
+    {
+        dot += "    empty [label=\"Arbol vacio\"];\n";
+    } else
+    {
+        generarDotPriv(raiz, dot);
+    }
+
+    dot += "}\n";
+
+    ofstream file(nombre);
+    if (file.is_open())
+    {
+        file << dot;
+        file.close();
+        cout << "Archivo DOT generado: " << nombre << endl;
+    } else
+    {
+        cout << "Error al crear archivo: " << nombre << endl;
+    }
 }
 
 int ArbolAVL::getSize() const

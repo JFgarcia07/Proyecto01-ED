@@ -14,7 +14,7 @@ ListaProductosOrdenada::~ListaProductosOrdenada()
     while (actual != nullptr)
     {
         Nodo* aux = actual;
-        cabeza = actual->siguiente;
+        actual = actual->siguiente;
         delete aux;
     }
     cabeza = nullptr;
@@ -41,7 +41,7 @@ bool ListaProductosOrdenada::insertar(const Producto& producto)
         actual = actual->siguiente;
     }
 
-    nuevo->siguiente = cabeza->siguiente;
+    nuevo->siguiente = actual->siguiente;
     actual->siguiente = nuevo;
     size++;
     return true;
@@ -91,6 +91,7 @@ bool ListaProductosOrdenada::remover(const string& codigoBarra)
     {
         Nodo* aux = cabeza;
         cabeza = cabeza->siguiente;
+        delete aux;
         size--;
         return true;
     }

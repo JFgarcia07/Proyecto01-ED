@@ -6,7 +6,7 @@
 
 using namespace std;
 
-BMasNodo::BMasNodo(int grado, bool esHoja): siguiente(nullptr), numClaves(0), esHoja(esHoja)
+BMasNodo::BMasNodo(int grado, bool esHoja): siguiente(nullptr), numClaves(0), grado(grado), esHoja(esHoja)
 {
     claves = new string[2*grado -1];
     if (esHoja)

@@ -22,7 +22,7 @@ void ArbolB::destruirArbol(BNodo* nodo)
 
     if (!nodo->esHoja)
     {
-        for (int i = 0; i < nodo->numClaves; i++)
+        for (int i = 0; i <= nodo->numClaves; i++)
         {
             destruirArbol(nodo->hijos[i]);
         }
@@ -97,12 +97,12 @@ void ArbolB::rangoBusquedaPriv(BNodo* nodo, const string& fechaInicio, const str
         if (nodo->claves[i].fechaExpiracion > fechaFinal) {
             return;
         }
+    }
 
-        //Recorrer el ultimo hijo si no es hoja
-        if (!nodo->esHoja)
-        {
-            rangoBusquedaPriv(nodo->hijos[i], fechaInicio, fechaFinal, contador);
-        }
+    // Recorrer el hijo mas a la derecha
+    if (!nodo->esHoja)
+    {
+        rangoBusquedaPriv(nodo->hijos[nodo->numClaves], fechaInicio, fechaFinal, contador);
     }
 }
 
@@ -139,7 +139,7 @@ bool ArbolB::insertar(const Producto& producto)
 
 void ArbolB::separarHijos(BNodo* padre, int i, BNodo* hijo)
 {
-    BNodo* nuevoNodo = new BNodo(hijo->grado, padre->esHoja);
+    BNodo* nuevoNodo = new BNodo(hijo->grado, hijo->esHoja);
     nuevoNodo->numClaves = grado - 1;
 
     //COPIAMOS LAS ULTIMAS T-1 CLAVES DEL HIJO AL NUEVO NODO
@@ -159,14 +159,21 @@ void ArbolB::separarHijos(BNodo* padre, int i, BNodo* hijo)
 
     hijo->numClaves = grado - 1;
 
-    //HACEMOS ESPACIO PARA EL NUEVO HIJO DEL PAFRE
+    //HACEMOS ESPACIO PARA EL NUEVO HIJO DEL PADRE
     for (int j = padre->numClaves; j >= i + 1; j--)
     {
-        padre->claves[j+1] = padre->claves[j];
+        padre->hijos[j + 1] = padre->hijos[j];
+    }
+    padre->hijos[i + 1] = nuevoNodo;
+
+    //HACEMOS ESPACIO PARA LA NUEVA CLAVE EN EL PADRE
+    for (int j = padre->numClaves - 1; j >= i; j--)
+    {
+        padre->claves[j + 1] = padre->claves[j];
     }
 
     //LA CLAVE DEL MEDIO DEL HIJO SUBE AL PADRE
-    padre->claves[i] = padre->claves[grado - 1];
+    padre->claves[i] = hijo->claves[grado - 1];
     padre->numClaves++;
 }
 
@@ -431,7 +438,7 @@ void ArbolB::merge(BNodo* nodo, int indice)
     //COPIAR CLAVES DEL HERMANO AL HIJO
     for (int i = 0; i < hermano->numClaves; i++)
     {
-        hijo->hijos[i + 1] = hermano->hijos[i];
+        hijo->claves[i + grado] = hermano->claves[i];
     }
 
     //COPIR HIJOS DEL HERMANO AL HIJO
@@ -443,12 +450,13 @@ void ArbolB::merge(BNodo* nodo, int indice)
         }
     }
 
-    //DEZPLAZAR CLAVES E HIJOS DEL PADRE A LA IZQ
+    //DEZPLAZAR CLAVES DEL PADRE A LA IZQ
     for (int i = indice + 1; i < nodo->numClaves; i++)
     {
-        nodo->hijos[i - 1] = nodo->hijos[i];
+        nodo->claves[i - 1] = nodo->claves[i];
     }
 
+    //DEZPLAZAR HIJOS DEL PADRE A LA IZQ
     for (int i = indice + 2; i <= nodo->numClaves; i++)
     {
         nodo->hijos[i - 1] = nodo->hijos[i];

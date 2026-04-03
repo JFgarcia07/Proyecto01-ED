@@ -1,9 +1,29 @@
-digraph BPlusTree {
-    node [shape=record, style=filled, fillcolor="#EEEDFE"];
-    rankdir=TB;
+digraph ArbolAVL {
+    node [shape=ellipse, style=filled, fillcolor="#D6EAF8"];
 
-    node0 [label="Lacteos: ", fillcolor="#E1F5EE"];
-
-    // Enlaces entre hojas
-    { rank=same; }
+    "Leche Entera" [label="Leche Entera\n(5)"];
+    "Leche Entera" -> "Coca Cola";
+    "Coca Cola" [label="Coca Cola\n(3)"];
+    "Coca Cola" -> "Arroz Blanco";
+    "Arroz Blanco" [label="Arroz Blanco\n(2)"];
+    "Arroz Blanco" -> "Aceite Vegetal";
+    "Aceite Vegetal" [label="Aceite Vegetal\n(1)"];
+    "Coca Cola" -> "Frijol Negro";
+    "Frijol Negro" [label="Frijol Negro\n(2)"];
+    "Frijol Negro" -> "Jabon Platos";
+    "Jabon Platos" [label="Jabon Platos\n(1)"];
+    "Leche Entera" -> "Pan Integral";
+    "Pan Integral" [label="Pan Integral\n(4)"];
+    "Pan Integral" -> "Manzana Roja";
+    "Manzana Roja" [label="Manzana Roja\n(2)"];
+    "Manzana Roja" -> "Mynor";
+    "Mynor" [label="Mynor\n(1)"];
+    "Pan Integral" -> "SACO";
+    "SACO" [label="SACO\n(3)"];
+    "SACO" -> "Pasta Dental";
+    "Pasta Dental" [label="Pasta Dental\n(1)"];
+    "SACO" -> "Yogurt Natural";
+    "Yogurt Natural" [label="Yogurt Natural\n(2)"];
+    "Yogurt Natural" -> "Tabaco";
+    "Tabaco" [label="Tabaco\n(1)"];
 }

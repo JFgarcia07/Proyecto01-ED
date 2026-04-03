@@ -26,7 +26,7 @@ string LectorCSV::quitarComillas(const string& entrada) const
         resultado.erase(resultado.size() - 1);
     }
 
-    if (resultado.size() >= 2 && resultado[0] == '""' && resultado[resultado.size() - 1] == '"')
+    if (resultado.size() >= 2 && resultado[0] == '"' && resultado[resultado.size() - 1] == '"')
     {
         resultado = resultado.substr(1, resultado.size() - 2);
     }
@@ -136,6 +136,7 @@ int LectorCSV::cargar(const string& nombreArchivo, Catalogo& catalogo)
         return -1;
     }
 
+    system("mkdir -p logs");
     ofstream errorArchivo("logs/errores.log");
     if (!errorArchivo.is_open())
     {
@@ -151,7 +152,7 @@ int LectorCSV::cargar(const string& nombreArchivo, Catalogo& catalogo)
     if (getline(archivo, linea))
     {
         liniaNum++;
-        if (!linea.empty() && linea[linea.size() - 1] == '\n')
+        if (!linea.empty() && linea[linea.size() - 1] == '\r')
         {
             linea.erase(linea.size() - 1);
         }

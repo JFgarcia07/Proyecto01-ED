@@ -1,0 +1,12 @@
+digraph BPlusTree {
+    node [shape=record, style=filled, fillcolor="#EEEDFE"];
+    rankdir=TB;
+
+    node0 [label="<f0> Granos | <f1> Lacteos", fillcolor="#EEEDFE"];
+    node1 [label="Aceites: Aceite Vegetal | Bebidas: Coca Cola | Drogas: Tabaco | Frutas: Manzana Roja | Granos: Arroz Blanco", fillcolor="#E1F5EE"];
+    node0 -> node1;
+    node2 [label="Granos: Frijol Negro | Higiene: Pasta Dental | Juguete: Mynor | Lacteos: Leche Entera", fillcolor="#E1F5EE"];
+    node0 -> node2;
+    node3 [label="Lacteos: Yogurt Natural | Limpieza: Jabon Platos | Panaderia: Pan Integral | Saco: SACO", fillcolor="#E1F5EE"];
+    node0 -> node3;
+}

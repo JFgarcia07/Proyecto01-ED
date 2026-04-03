@@ -124,8 +124,13 @@ void Catalogo::listaPorNombres() const
 void Catalogo::generarArchivosDot() const
 {
     arbolAVL.generarDot("output/avl_tree.dot");
-    arbolB.generarDot("output/avl_tree.dot");
-    arbolBMas.generarDot("output/avl_tree.dot");
+    arbolB.generarDot("output/b_tree.dot");
+    arbolBMas.generarDot("output/bplus_tree.dot");
+
+    //PARA LA GENERACION DE LAS IMAGENS
+    system("dot -Tpng output/avl_tree.dot -o output/avl_tree.png");
+    system("dot -Tpng output/b_tree.dot -o output/b_tree.png");
+    system("dot -Tpng output/bplus_tree.dot -o output/bplus_tree.png");
 }
 
 TablaHash& Catalogo::getTablaHash()

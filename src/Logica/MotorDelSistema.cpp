@@ -5,6 +5,9 @@
 #include <iostream>
 #include <string>
 #include "MotorDelSistema.h"
+
+#include <limits>
+
 #include "Catologo.h"
 #include "LectorCSV.h"
 
@@ -41,8 +44,9 @@ void MotorDelSistema::menu()
 void MotorDelSistema::cargarCSV(Catalogo& catalogo)
 {
     string nombreArchivo;
+    cin.ignore();
     cout << "\nRuta del archivo CSV (ej: data/productos.csv): ";
-    std::cin >> nombreArchivo;
+    getline(cin, nombreArchivo);
 
     LectorCSV lector;
     int cargado = lector.cargar(nombreArchivo, catalogo);
@@ -56,7 +60,10 @@ void MotorDelSistema::agregarProducto(Catalogo& catalogo)
 {
     Producto producto;
 
-    cout << "\n--- Agregar nuevo producto ---" << endl;;
+    cout << "\n--- Agregar nuevo producto ---" << endl;
+
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     cout << "Nombre: ";
     getline(cin, producto.nombre);
 
@@ -72,11 +79,38 @@ void MotorDelSistema::agregarProducto(Catalogo& catalogo)
     cout << "Marca: ";
     getline(cin, producto.marca);
 
-    cout << "Precio: ";
-    cin >> producto.precio;
+    bool precioValido = false;
+    while (!precioValido) {
+        cout << "Precio: ";
+        string inputPrecio;
+        cin >> inputPrecio;
+        try {
+            size_t pos;
+            producto.precio = stod(inputPrecio, &pos);
+            if (pos != inputPrecio.size()) throw invalid_argument("caracteres extra");
+            if (producto.precio < 0) throw invalid_argument("negativo");
+            precioValido = true;
+        } catch (...) {
+            cout << "Error: ingrese un numero valido para el precio (ej: 12.50)" << endl;
+        }
+    }
 
-    cout << "Stock: ";
-    cin >> producto.stock;
+    bool stockValido = false;
+    while (!stockValido) {
+        cout << "Stock: ";
+        string inputStock;
+        cin >> inputStock;
+        try {
+            size_t pos;
+            long val = stol(inputStock, &pos);
+            if (pos != inputStock.size()) throw invalid_argument("caracteres extra");
+            if (val < 0) throw invalid_argument("negativo");
+            producto.stock = static_cast<int>(val);
+            stockValido = true;
+        } catch (...) {
+            cout << "Error: ingrese un numero entero valido para el stock (ej: 10)" << endl;
+        }
+    }
 
     if (catalogo.agregarProducto(producto))
     {
@@ -104,7 +138,8 @@ void MotorDelSistema::removerProducto(Catalogo& catalogo)
 void MotorDelSistema::buscarPorNombre(Catalogo& catalogo)
 {
     string nombre;
-    cout << "\nNombre del producto";
+    cout << "\nNombre del producto: ";
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     getline(cin, nombre);
 
     Producto* producto = catalogo.buscarPorNombre(nombre);
@@ -121,7 +156,8 @@ void MotorDelSistema::buscarPorNombre(Catalogo& catalogo)
 void MotorDelSistema::buscarPorCodigoBarras(Catalogo& catalogo)
 {
     string codigoBarras;
-    cout << "\nCodigo de barras del producto";
+    cout << "\nCodigo de barras del producto: ";
+    //cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     cin >> codigoBarras;
 
     Producto* producto = catalogo.buscarPorCodigoBarras(codigoBarras);
@@ -148,9 +184,9 @@ void MotorDelSistema::buscarPorCategoria(Catalogo& catalogo)
 void MotorDelSistema::buscarPorRangoFecha(Catalogo& catalogo)
 {
     string fechaInicio, fechaFin;
-    cout << "\nFecha de inicio (YYYY - MM - DD)";
+    cout << "\nFecha de inicio (YYYY - MM - DD): ";
     cin >> fechaInicio;
-    cout << "\nFecha final (YYYY - MM - DD)";
+    cout << "\nFecha final (YYYY - MM - DD): ";
     cin >> fechaFin;
 
     cout << endl;
@@ -170,9 +206,15 @@ void MotorDelSistema::generarDot(Catalogo& catalogo)
     catalogo.generarArchivosDot();
 
     cout << "\nArchivos generados en output/:" << endl;
+    cout << "Archivos .dot" << endl;
     cout << "  - avl_tree.dot" << endl;
     cout << "  - b_tree.dot" << endl;
     cout << "  - bplus_tree.dot" << endl;
+
+    cout << "Archivos .png" << endl;
+    cout << "  - avl_tree.png" << endl;
+    cout << "  - b_tree.png" << endl;
+    cout << "  - bplus_tree.png" << endl;
 }
 
 void MotorDelSistema::mostrarDatosHash(Catalogo& catalogo)
